@@ -49,9 +49,9 @@ class WeatherService {
     }
   }
 
-  /// Fetch 5-day forecast for a city
+  /// Fetch 7-day forecast for a city
   ///
-  /// Returns a list of daily forecast data (5 days)
+  /// Returns a list of daily forecast data (7 days)
   /// Throws [WeatherException] if the request fails
   Future<List<ForecastDay>> getForecast(String city) async {
     try {
@@ -124,9 +124,9 @@ class WeatherService {
 
     final List<ForecastDay> forecasts = [];
 
-    // Get 5 days of forecast (skip today, get next 5 days)
+    // Get 7 days of forecast (skip today, get next 7 days)
     const startIndex = 1; // Skip today (index 0)
-    final endIndex = (startIndex + 5).clamp(0, dates.length);
+    final endIndex = (startIndex + 7).clamp(0, dates.length);
 
     for (var i = startIndex; i < endIndex; i++) {
       forecasts.add(

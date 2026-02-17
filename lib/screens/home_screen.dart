@@ -37,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   /// Handle city search
-  void _handleSearch(String city) {
-    context.read<WeatherProvider>().fetchWeather(city);
+  Future<void> _handleSearch(String city) async {
+    await context.read<WeatherProvider>().fetchWeather(city);
     _loadRecentSearches(); // Reload recent searches after new search
   }
 
@@ -118,13 +118,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (weatherProvider.hasData) {
                     return Column(
                       children: [
-                        // Current Weather Card
-                        CurrentWeatherCard(
-                          weather: weatherProvider.currentWeather!,
+                        // Current Weather Card (Centered)
+                        Center(
+                          child: CurrentWeatherCard(
+                            weather: weatherProvider.currentWeather!,
+                          ),
                         ),
                         const SizedBox(height: 24),
 
-                        // 5-Day Forecast
+                        // 7-Day Forecast
                         ForecastList(
                           forecasts: weatherProvider.forecast,
                         ),

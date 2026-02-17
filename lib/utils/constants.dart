@@ -22,7 +22,7 @@ class AppConstants {
   static const String retryButton = 'Retry';
   static const String clearButton = 'Clear All';
   static const String recentSearchesLabel = 'Recent Searches';
-  static const String forecastLabel = '5-Day Forecast';
+  static const String forecastLabel = '7-Day Forecast';
   static const String feelsLikeLabel = 'Feels like';
   static const String humidityLabel = 'Humidity';
   static const String windSpeedLabel = 'Wind Speed';

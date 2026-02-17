@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-A beautiful and responsive weather dashboard mobile application built with Flutter and Dart. Get real-time weather information and 5-day forecasts for any city worldwide using **completely free** Open-Meteo API!
+A beautiful and responsive weather dashboard mobile application built with Flutter and Dart. Get real-time weather information and 7-day forecasts for any city worldwide using **completely free** Open-Meteo API!
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.0+-blue.svg)
 ![Dart](https://img.shields.io/badge/Dart-3.0+-blue.svg)
@@ -8,9 +8,9 @@ A beautiful and responsive weather dashboard mobile application built with Flutt
 
 ## ✨ Features
 
-- 🔍 **City Search** - Search for weather by city name
+- 🔍 **City Search** - Search for weather by city name with autocomplete
 - 🌡️ **Current Weather** - Display temperature, feels like, humidity, wind speed, and conditions
-- 📅 **5-Day Forecast** - View daily weather forecasts with min/max temperatures
+- 📅 **7-Day Forecast** - View daily weather forecasts with min/max temperatures
 - 📱 **Responsive Design** - Optimized for both Android and iOS devices
 - 💾 **Recent Searches** - Save and quickly access your recent city searches (up to 10)
 - 🌓 **Dark/Light Mode** - Toggle between dark and light themes with persistent preference
@@ -123,12 +123,12 @@ weather_dashboard/
 
 ## 📖 How It Works
 
-1. **User Input**: User enters a city name in the search bar
+1. **User Input**: User enters a city name in the search bar (with autocomplete suggestions)
 2. **Geocoding**: App converts city name to coordinates using Open-Meteo's geocoding API
 3. **Weather Request**: App fetches weather data using coordinates
 4. **Data Processing**:
    - Current weather data is parsed into CurrentWeather model
-   - Forecast data (7 days) is extracted and limited to 5 days
+   - Forecast data is extracted for the next 7 days
    - Weather codes are converted to descriptions and icons
 5. **State Update**: WeatherProvider updates app state and notifies UI
 6. **UI Rendering**: Flutter rebuilds UI with new weather data
@@ -146,12 +146,13 @@ weather_dashboard/
 - Wind speed (km/h)
 - Beautiful gradient background based on weather condition
 
-### 5-Day Forecast
-- Horizontal scrollable list
+### 7-Day Forecast
+- Horizontal scrollable list in a styled card
 - Day name
 - Weather emoji icon
 - Min/max temperature range
 - Weather description
+- Light gradient background for better visibility
 
 ### Recent Searches
 - Display up to 10 recent city searches

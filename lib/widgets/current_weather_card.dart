@@ -14,12 +14,10 @@ class CurrentWeatherCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Card(
       elevation: 4,
+      margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Container(
-        width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           gradient: LinearGradient(
@@ -29,90 +27,108 @@ class CurrentWeatherCard extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // City and Country
-              Text(
-                '${weather.city}, ${weather.country}',
-                style: textTheme.headlineMedium?.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 8),
-
-              // Date
-              Text(
-                WeatherFormatters.formatFullDate(weather.dateTime),
-                style: textTheme.bodyLarge?.copyWith(
-                  color: Colors.white70,
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // Weather Icon and Description
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppConstants.getWeatherEmoji(weather.iconCode),
-                    style: const TextStyle(fontSize: 64),
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: SizedBox(
+            height: 80,
+            child: Stack(
+              children: [
+                // Left section: City, Date & Description
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Temperature
                       Text(
-                        WeatherFormatters.formatTemperature(weather.temperature),
-                        style: textTheme.headlineLarge?.copyWith(
+                        '${weather.city}, ${weather.country}',
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 56,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        WeatherFormatters.formatFullDate(weather.dateTime),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
                         ),
                       ),
-                      // Feels Like
+                      const SizedBox(height: 4),
                       Text(
-                        '${AppConstants.feelsLikeLabel} ${WeatherFormatters.formatTemperature(weather.feelsLike)}',
-                        style: textTheme.bodyMedium?.copyWith(
-                          color: Colors.white70,
+                        WeatherFormatters.capitalizeWords(weather.description),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
                   ),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Description
-              Text(
-                WeatherFormatters.capitalizeWords(weather.description),
-                style: textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
                 ),
-              ),
-              const SizedBox(height: 32),
 
-              // Additional Info Row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Humidity
-                  _InfoTile(
-                    icon: Icons.water_drop,
-                    label: AppConstants.humidityLabel,
-                    value: WeatherFormatters.formatHumidity(weather.humidity),
+                // Centered Temperature Section
+                Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppConstants.getWeatherEmoji(weather.iconCode),
+                        style: const TextStyle(fontSize: 40),
+                      ),
+                      const SizedBox(width: 8),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            WeatherFormatters.formatTemperature(weather.temperature),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '${AppConstants.feelsLikeLabel} ${WeatherFormatters.formatTemperature(weather.feelsLike)}',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  // Wind Speed
-                  _InfoTile(
-                    icon: Icons.air,
-                    label: AppConstants.windSpeedLabel,
-                    value: WeatherFormatters.formatWindSpeed(weather.windSpeed),
+                ),
+
+                // Right section: Weather Info
+                Positioned(
+                  right: 0,
+                  top: 0,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _InfoTileCompact(
+                        icon: Icons.water_drop,
+                        label: AppConstants.humidityLabel,
+                        value: WeatherFormatters.formatHumidity(weather.humidity),
+                      ),
+                      const SizedBox(width: 16),
+                      _InfoTileCompact(
+                        icon: Icons.air,
+                        label: AppConstants.windSpeedLabel,
+                        value: WeatherFormatters.formatWindSpeed(weather.windSpeed),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -147,13 +163,13 @@ class CurrentWeatherCard extends StatelessWidget {
   }
 }
 
-/// Small info tile for humidity and wind speed
-class _InfoTile extends StatelessWidget {
+/// Compact info tile for humidity and wind speed
+class _InfoTileCompact extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
 
-  const _InfoTile({
+  const _InfoTileCompact({
     required this.icon,
     required this.label,
     required this.value,
@@ -162,26 +178,26 @@ class _InfoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           icon,
           color: Colors.white,
-          size: 32,
+          size: 20,
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 2),
         Text(
           label,
           style: const TextStyle(
             color: Colors.white70,
-            fontSize: 12,
+            fontSize: 10,
           ),
         ),
-        const SizedBox(height: 4),
         Text(
           value,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
