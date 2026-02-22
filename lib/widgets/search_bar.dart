@@ -16,6 +16,7 @@ class CitySearchBar extends StatefulWidget {
 
 class _CitySearchBarState extends State<CitySearchBar> {
   final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   // Popular cities for autocomplete suggestions
   static const List<String> _popularCities = [
@@ -88,6 +89,7 @@ class _CitySearchBarState extends State<CitySearchBar> {
   @override
   void dispose() {
     _controller.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -104,7 +106,7 @@ class _CitySearchBarState extends State<CitySearchBar> {
             Expanded(
               child: RawAutocomplete<String>(
                 textEditingController: _controller,
-                focusNode: FocusNode(),
+                focusNode: _focusNode,
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.isEmpty) {
                     return const Iterable<String>.empty();
@@ -147,6 +149,7 @@ class _CitySearchBarState extends State<CitySearchBar> {
                     alignment: Alignment.topLeft,
                     child: Material(
                       elevation: 4.0,
+                      color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(8),
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(

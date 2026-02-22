@@ -12,10 +12,10 @@ class AppColors {
   static const Color lightTextSecondary = Color(0xFF757575); // Grey
 
   // Dark Theme Colors
-  static const Color darkPrimary = Color(0xFF1976D2); // Darker Blue
-  static const Color darkSecondary = Color(0xFF0288D1); // Darker Light Blue
+  static const Color darkPrimary = Color(0xFF42A5F5); // Bright Blue
+  static const Color darkSecondary = Color(0xFF29B6F6); // Bright Light Blue
   static const Color darkBackground = Color(0xFF121212); // Very Dark Grey
-  static const Color darkSurface = Color(0xFF1E1E1E); // Dark Grey
+  static const Color darkSurface = Color(0xFF2C2C2C); // Medium Dark Grey
   static const Color darkError = Color(0xFFCF6679); // Light Red
   static const Color darkTextPrimary = Color(0xFFFFFFFF); // White
   static const Color darkTextSecondary = Color(0xFFB0B0B0); // Light Grey

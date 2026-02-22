@@ -18,6 +18,8 @@ class ForecastList extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Card(
       elevation: 2,
       margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -27,10 +29,9 @@ class ForecastList extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Colors.blue.shade50,
-              Colors.blue.shade100,
-            ],
+            colors: isDark
+                ? [Colors.blueGrey.shade800, Colors.blueGrey.shade900]
+                : [Colors.blue.shade50, Colors.blue.shade100],
           ),
         ),
         child: Padding(

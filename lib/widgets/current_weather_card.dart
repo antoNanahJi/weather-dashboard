@@ -183,21 +183,21 @@ class _InfoTileCompact extends StatelessWidget {
         Icon(
           icon,
           color: Colors.white,
-          size: 20,
+          size: 28,
         ),
         const SizedBox(height: 2),
         Text(
           label,
           style: const TextStyle(
             color: Colors.white70,
-            fontSize: 10,
+            fontSize: 14,
           ),
         ),
         Text(
           value,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
